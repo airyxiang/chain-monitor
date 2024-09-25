@@ -10,4 +10,7 @@ account_client = AccountClient(api_key=HTX_API_KEY, secret_key=HTX_API_SECRET_KE
 def get_account_balance_by_currency(currency):
     account_balance_list = account_client.get_account_balance()
     account_balances = account_balance_list[0]
-    return [balance.balance for balance in account_balances.list if balance.currency == currency]
+    balance = [balance for balance in account_balances.list if balance.currency == currency]
+    if not balance:
+        return 0
+    return balance[0].balance

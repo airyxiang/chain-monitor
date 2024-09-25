@@ -7,12 +7,8 @@ params_req = {"limit": 10}
 client = PoloSDK()
 
 
-def get_account_balance_by_currency(currency, account_id=None):
-    if account_id:
-        path_req = f'/accounts/{account_id}/balances'
-    else:
-        path_req = "/accounts/balances"
-
+def get_account_balance_by_currency(currency):
+    path_req = "/accounts/balances"
     response = client.sign_req(host, path_req, method_req, params_req, headers)
     balances = [balance for balance in response[0]['balances'] if balance['currency'] == currency]
     if not balances:

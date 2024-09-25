@@ -19,12 +19,15 @@ class SlackMessage:
     def add_table(self, headers, rows):
         self.add_message(self._create_table(headers=headers, rows=rows))
 
+    def add_warning(self, *members):
+        message = ''.join(f'<@{member}>' for member in members)
+        self.add_message(message=message)
+
     @staticmethod
     def _create_table(headers, rows):
         col_widths = [max(len(str(item)) for item in col) for col in zip(*rows, headers)]
         header_row = ' | '.join(header.ljust(w) for header, w in zip(headers, col_widths))
         separator = '-+-'.join('-' * w for w in col_widths)
-
         table = f"{header_row}\n{separator}\n"
         for row in rows:
             data_row = ' | '.join(
@@ -33,5 +36,6 @@ class SlackMessage:
             )
             table = f'{table}{data_row}\n'
 
-        split_point = table[:len(table) // 2].rfind('\n')
-        return [f'```\n{table[:split_point]}\n```', f'```\n{table[split_point + 1:]}\n```']
+        return f'```{table}```'
+        # split_point = table[:len(table) // 2].rfind('\n')
+        # return [f'```\n{table[:split_point]}\n```', f'```\n{table[split_point + 1:]}\n```']
