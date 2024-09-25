@@ -21,7 +21,7 @@ RUN pip-sync /requirements/requirements.txt
 # Copy rest of files
 COPY . /home/app
 
-RUN mkdir /etc/supervisor.d && ln -s /home/configurations/infra/supervisord.conf /etc/ && \
+RUN mkdir /etc/supervisor.d && ln -s /home/app/infra/supervisord.conf /etc/ && \
     mkdir /var/log/supervisor && \
     groupadd web && useradd web -g web
 
