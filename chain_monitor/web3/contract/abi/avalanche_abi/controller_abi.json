@@ -1,0 +1,1250 @@
+[
+    {
+        "type": "event",
+        "name": "AllMintsPaused",
+        "inputs": [
+            {
+                "type": "bool",
+                "name": "status",
+                "internalType": "bool",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "CanBurn",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "burner",
+                "internalType": "address",
+                "indexed": false
+            },
+            {
+                "type": "bool",
+                "name": "canBurn",
+                "internalType": "bool",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "FastPauseSet",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_newFastPause",
+                "internalType": "address",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "FinalizeMint",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "to",
+                "internalType": "address",
+                "indexed": true
+            },
+            {
+                "type": "uint256",
+                "name": "value",
+                "internalType": "uint256",
+                "indexed": true
+            },
+            {
+                "type": "uint256",
+                "name": "opIndex",
+                "internalType": "uint256",
+                "indexed": false
+            },
+            {
+                "type": "address",
+                "name": "mintKey",
+                "internalType": "address",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "InstantMint",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "to",
+                "internalType": "address",
+                "indexed": true
+            },
+            {
+                "type": "uint256",
+                "name": "value",
+                "internalType": "uint256",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "mintKey",
+                "internalType": "address",
+                "indexed": true
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "InstantPoolRefilled",
+        "inputs": [],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "MintApproved",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "approver",
+                "internalType": "address",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "opIndex",
+                "internalType": "uint256",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "MintLimitsChanged",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "instant",
+                "internalType": "uint256",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "ratified",
+                "internalType": "uint256",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "multiSig",
+                "internalType": "uint256",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "MintPaused",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "opIndex",
+                "internalType": "uint256",
+                "indexed": false
+            },
+            {
+                "type": "bool",
+                "name": "status",
+                "internalType": "bool",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "MintRatified",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "opIndex",
+                "internalType": "uint256",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "ratifier",
+                "internalType": "address",
+                "indexed": true
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "MintThresholdChanged",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "instant",
+                "internalType": "uint256",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "ratified",
+                "internalType": "uint256",
+                "indexed": false
+            },
+            {
+                "type": "uint256",
+                "name": "multiSig",
+                "internalType": "uint256",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "MultiSigPoolRefilled",
+        "inputs": [],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "NewOwnerPending",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "currentOwner",
+                "internalType": "address",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "pendingOwner",
+                "internalType": "address",
+                "indexed": true
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "OwnershipTransferred",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "previousOwner",
+                "internalType": "address",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "newOwner",
+                "internalType": "address",
+                "indexed": true
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "RatifyPoolRefilled",
+        "inputs": [],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "RequestMint",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "to",
+                "internalType": "address",
+                "indexed": true
+            },
+            {
+                "type": "uint256",
+                "name": "value",
+                "internalType": "uint256",
+                "indexed": true
+            },
+            {
+                "type": "uint256",
+                "name": "opIndex",
+                "internalType": "uint256",
+                "indexed": false
+            },
+            {
+                "type": "address",
+                "name": "mintKey",
+                "internalType": "address",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "RequestReclaimContract",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "other",
+                "internalType": "address",
+                "indexed": true
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "RevokeMint",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "opIndex",
+                "internalType": "uint256",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "SetToken",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "newContract",
+                "internalType": "contract ITrueCurrency",
+                "indexed": false
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "TransferChild",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "child",
+                "internalType": "address",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "newOwner",
+                "internalType": "address",
+                "indexed": true
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "event",
+        "name": "TransferMintKey",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "previousMintKey",
+                "internalType": "address",
+                "indexed": true
+            },
+            {
+                "type": "address",
+                "name": "newMintKey",
+                "internalType": "address",
+                "indexed": true
+            }
+        ],
+        "anonymous": false
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint8",
+                "name": "",
+                "internalType": "uint8"
+            }
+        ],
+        "name": "MULTISIG_MINT_SIGS",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "address",
+                "name": "",
+                "internalType": "address"
+            }
+        ],
+        "name": "PAUSED_IMPLEMENTATION",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint8",
+                "name": "",
+                "internalType": "uint8"
+            }
+        ],
+        "name": "RATIFY_MINT_SIGS",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "bool",
+                "name": "",
+                "internalType": "bool"
+            }
+        ],
+        "name": "canFinalize",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_index",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "claimOwnership",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "claimTrueCurrencyProxyOwnership",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "finalizeMint",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_index",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "bool",
+                "name": "",
+                "internalType": "bool"
+            }
+        ],
+        "name": "hasEnoughApproval",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_numberOfApproval",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "_value",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "initialize",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "instantMint",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_to",
+                "internalType": "address"
+            },
+            {
+                "type": "uint256",
+                "name": "_value",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "instantMintLimit",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "instantMintPool",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "instantMintThreshold",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "invalidateAllPendingMints",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "bool",
+                "name": "",
+                "internalType": "bool"
+            }
+        ],
+        "name": "isMintPauser",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "bool",
+                "name": "",
+                "internalType": "bool"
+            }
+        ],
+        "name": "isMintRatifier",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "issueClaimOwnership",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_other",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "address",
+                "name": "",
+                "internalType": "address"
+            }
+        ],
+        "name": "mintKey",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "mintOperationCount",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "address",
+                "name": "to",
+                "internalType": "address"
+            },
+            {
+                "type": "uint256",
+                "name": "value",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "requestedBlock",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "numberOfApproval",
+                "internalType": "uint256"
+            },
+            {
+                "type": "bool",
+                "name": "paused",
+                "internalType": "bool"
+            }
+        ],
+        "name": "mintOperations",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "bool",
+                "name": "",
+                "internalType": "bool"
+            }
+        ],
+        "name": "mintPaused",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "mintReqInvalidBeforeThisBlock",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "multiSigMintLimit",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "multiSigMintPool",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "multiSigMintThreshold",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "address",
+                "name": "",
+                "internalType": "address payable"
+            }
+        ],
+        "name": "owner",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "pauseMint",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_opIndex",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "pauseMints",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "pauseToken",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "address",
+                "name": "",
+                "internalType": "address payable"
+            }
+        ],
+        "name": "pendingOwner",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "ratifiedMintLimit",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "ratifiedMintPool",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ],
+        "name": "ratifiedMintThreshold",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "address",
+                "name": "",
+                "internalType": "address"
+            }
+        ],
+        "name": "ratifiedPoolRefillApprovals",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "ratifyMint",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_index",
+                "internalType": "uint256"
+            },
+            {
+                "type": "address",
+                "name": "_to",
+                "internalType": "address"
+            },
+            {
+                "type": "uint256",
+                "name": "_value",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "reclaimEther",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_to",
+                "internalType": "address payable"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "reclaimToken",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_token",
+                "internalType": "contract IERC20"
+            },
+            {
+                "type": "address",
+                "name": "_to",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "refillInstantMintPool",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "refillMultiSigMintPool",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "refillRatifiedMintPool",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "address",
+                "name": "",
+                "internalType": "address"
+            }
+        ],
+        "name": "registryAdmin",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "requestMint",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_to",
+                "internalType": "address"
+            },
+            {
+                "type": "uint256",
+                "name": "_value",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "requestReclaimEther",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "requestReclaimToken",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_token",
+                "internalType": "contract IERC20"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "revokeMint",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_index",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "setBlacklisted",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "account",
+                "internalType": "address"
+            },
+            {
+                "type": "bool",
+                "name": "isBlacklisted",
+                "internalType": "bool"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "setBurnBounds",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_min",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "_max",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "setCanBurn",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "burner",
+                "internalType": "address"
+            },
+            {
+                "type": "bool",
+                "name": "canBurn",
+                "internalType": "bool"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "setIsMintPauser",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "account",
+                "internalType": "address"
+            },
+            {
+                "type": "bool",
+                "name": "status",
+                "internalType": "bool"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "setIsMintRatifier",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "account",
+                "internalType": "address"
+            },
+            {
+                "type": "bool",
+                "name": "status",
+                "internalType": "bool"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "setMintLimits",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_instant",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "_ratified",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "_multiSig",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "setMintThresholds",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_instant",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "_ratified",
+                "internalType": "uint256"
+            },
+            {
+                "type": "uint256",
+                "name": "_multiSig",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "setRegistryAdmin",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "admin",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "setToken",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_newContract",
+                "internalType": "contract ITrueCurrency"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "view",
+        "outputs": [
+            {
+                "type": "address",
+                "name": "",
+                "internalType": "contract ITrueCurrency"
+            }
+        ],
+        "name": "token",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "transferChild",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_child",
+                "internalType": "contract IHasOwner"
+            },
+            {
+                "type": "address",
+                "name": "_newOwner",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "transferMintKey",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_newMintKey",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "transferOwnership",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "newOwner",
+                "internalType": "address payable"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "transferTrueCurrencyProxyOwnership",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_newOwner",
+                "internalType": "address"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "unpauseMint",
+        "inputs": [
+            {
+                "type": "uint256",
+                "name": "_opIndex",
+                "internalType": "uint256"
+            }
+        ]
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "unpauseMints",
+        "inputs": []
+    },
+    {
+        "type": "function",
+        "stateMutability": "nonpayable",
+        "outputs": [],
+        "name": "upgradeTrueCurrencyProxyImplTo",
+        "inputs": [
+            {
+                "type": "address",
+                "name": "_implementation",
+                "internalType": "address"
+            }
+        ]
+    }
+]

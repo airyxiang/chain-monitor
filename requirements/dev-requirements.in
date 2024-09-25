@@ -1,0 +1,9 @@
+-c requirements.txt
+
+pytest~=6.2.5
+pytest-mock~=1.10
+freezegun~=0.3
+flake8==4.0.1
+pytest-cov==2.6.1
+pytest-val==0.1.1
+coverage-badge==0.2.0

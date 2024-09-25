@@ -1,0 +1,37 @@
+version: '3.5'
+
+x-base: &base
+  platform: linux/amd64
+  build:
+    context: .
+    args:
+      - BASE_IMAGE=python:3.8.20-slim-bullseye
+      - FURY_AUTH
+
+  env_file: .dockerenv
+  volumes:
+    - $PWD:/home/configurations:delegated
+  depends_on:
+    - redis
+  networks:
+    - default
+    - internal
+
+services:
+  scheduler:
+    <<: *base
+    container_name: chain_monitor
+    command: /home/configurations/entrypoint/run-scheduler.sh
+
+  redis:
+    container_name: chain_monitor_redis
+    image: redis:5-alpine
+    networks:
+      - internal
+
+
+networks:
+  default:
+    name: val
+    external: true
+  internal:
