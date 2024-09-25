@@ -38,4 +38,4 @@ ETH = {
     'TRON_CONTRACT': 'THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF'
 }
 
-MONITOR_SLACK_URL = ''
+MONITOR_SLACK_URL = 'https://hooks.slack.com/services/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'

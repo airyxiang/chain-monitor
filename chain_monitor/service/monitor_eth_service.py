@@ -2,6 +2,7 @@ from chain_monitor.configurations.configuration import ETH, MONITOR_SLACK_URL
 from chain_monitor.remote.htx import htx
 from chain_monitor.remote.polo import polo
 from chain_monitor.slack import slack_service, SlackMessage
+from chain_monitor.utils.money import convert_to_float
 from chain_monitor.web3.contract.tron_contract_factory import TokenContract
 
 contract_address = ETH.get('TRON_CONTRACT')
@@ -12,14 +13,14 @@ title = ['total_supply', 'polo_account', 'polo_wallet', 'htx_account', 'htx_wall
 
 
 def monitor_supplemented_eth():
-    eth_total_balance = contract.total_supply()
+    eth_total_balance = convert_to_float(contract.total_supply())
 
     polo_account_eth = polo.get_account_balance_by_currency('ETH')
     htx_account_eth = htx.get_account_balance_by_currency('ETH')
 
-    tron_reserve_eth = contract.balance_of('TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG')
-    polo_wallet_eth = contract.balance_of('TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG')
-    htx_wallet_eth = contract.balance_of('TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG')
+    tron_reserve_eth = convert_to_float(contract.balance_of('TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG'))
+    polo_wallet_eth = convert_to_float(contract.balance_of('TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG'))
+    htx_wallet_eth = convert_to_float(contract.balance_of('TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG'))
 
     supplemented_eth = eth_total_balance - polo_account_eth - htx_account_eth - tron_reserve_eth
 
