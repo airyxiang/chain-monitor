@@ -19,7 +19,7 @@ def monitor_supplemented_eth():
     htx_account_eth = htx.get_account_balance_by_currency('ETH')
 
     tron_reserve_eth = convert_to_float(contract.balance_of('TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG'))
-    polo_wallet_eth = convert_to_float(contract.balance_of('TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG'))
+    polo_wallet_eth = convert_to_float(contract.balance_of('TWhDfwC8QE6pQyiYy248dNor3uphPEw5M2'))
     htx_wallet_eth = convert_to_float(contract.balance_of('TUgSgCQL6pMSy9zByn4sgxqrJa95sZExBG'))
 
     supplemented_eth = eth_total_balance - polo_account_eth - htx_account_eth - tron_reserve_eth
@@ -42,3 +42,7 @@ def monitor_supplemented_eth():
         slack_message.add_warning('lily', 'tahoe')
 
     slack_service.send_message(channel=channel, message=slack_message)
+
+
+def get_wallet_balance():
+    pass

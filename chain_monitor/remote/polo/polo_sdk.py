@@ -39,8 +39,8 @@ class PoloSDK:
         )
         params = parse.urlencode(params)
         if params == "":
-            host = "{host}{path}".format(host=host, path=path)
+            request_url = "{host}{path}".format(host=host, path=path)
         else:
-            host = "{host}{path}?{params}".format(host=host, path=path, params=params)
-        response = requests.get(host, params={}, headers=headers)
+            request_url = "{host}{path}?{params}".format(host=host, path=path, params=params)
+        response = requests.get(request_url, params={}, headers=headers)
         return response.json()

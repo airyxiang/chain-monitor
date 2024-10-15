@@ -1,7 +1,7 @@
 from chain_monitor.configurations.initialization import scheduler
 
 from chain_monitor.configurations.logger import get_logger
-from chain_monitor.service.monitor_eth_service import monitor_supplemented_eth
+from chain_monitor.service.monitor_eth_task import monitor_supplemented_eth
 
 logger = get_logger(__name__)
 
