@@ -5,41 +5,49 @@ import hmac
 import base64
 import urllib
 from urllib import parse
-from chain_monitor.configurations.configuration import HTX_WALLET_API_KEY, HTX_WALLET_API_SECRET_KEY
+
+from huobi.exception.huobi_api_exception import HuobiApiException
+from huobi.utils import UrlParamsBuilder, utc_now, create_signature
+
+from chain_monitor.configurations.configuration import HTX_WALLET_API_KEY, HTX_WALLET_API_SECRET_KEY, HTX_API_KEY, \
+    HTX_API_SECRET_KEY
 
 
 class HtxSDK:
     def __init__(self):
-        self.__access_key = HTX_WALLET_API_KEY
-        self.__secret_key = HTX_WALLET_API_SECRET_KEY
-        self.__time = time.time()
+        self.__time = utc_now()
 
-    def __create_sign(self, params, method, path):
-        timestamp = int(self.__time * 1000)
-        params.update({"signTimestamp": timestamp})
-        sorted_params = sorted(params.items(), key=lambda d: d[0], reverse=False)
-        encode_params = parse.urlencode(sorted_params)
-        del params["signTimestamp"]
-        sign_params_first = [method.upper(), path, encode_params]
-        sign_params_second = "\n".join(sign_params_first)
-        sign_params = sign_params_second.encode(encoding="UTF8")
-        secret_key = self.__secret_key.encode(encoding="UTF8")
-        digest = hmac.new(secret_key, sign_params, digestmod=hashlib.sha256).digest()
-        signature = base64.b64encode(digest)
-        signature = signature.decode()
-        return signature
+    def create_wallet_sign(self, api_key, secret_key, method, url, builder):
+        if api_key is None or secret_key is None or api_key == "" or secret_key == "":
+            raise HuobiApiException(HuobiApiException.KEY_MISSING, "API key and secret key are required")
 
-    def get_time_stamp(self):
-        return datetime.datetime.fromtimestamp(self.__time).strftime('%Y-%m-%dT%H:%M:%S')
+        builder.put_url("AWSAccessKeyId", api_key)
+        builder.put_url("SignatureVersion", "2")
+        builder.put_url("SignatureMethod", "HmacSHA256")
+        builder.put_url("Timestamp", self.__time)
 
-    def sign_req(self, host, path, method, params):
-        signature = self.__create_sign(method=method, path=path, params=params)
+        host = urllib.parse.urlparse(url).hostname
+        path = urllib.parse.urlparse(url).path
 
-        signature_encoded = urllib.parse.quote(signature, safe='')
-        time_stamp_encoded = urllib.parse.quote(self.get_time_stamp(), safe=':')
+        keys = sorted(builder.param_map.keys())
+        qs0 = '&'.join(['%s=%s' % (key, parse.quote(builder.param_map[key], safe='')) for key in keys])
+        payload0 = '%s\n%s\n%s\n%s' % (method, host, path, qs0)
+        dig = hmac.new(secret_key.encode('utf-8'), msg=payload0.encode('utf-8'), digestmod=hashlib.sha256).digest()
+        s = base64.b64encode(dig).decode()
+        builder.put_url("Signature", s)
 
-        request_url = (f"{host}{path}?AWSAccessKeyId={HTX_WALLET_API_KEY}&Signature={signature_encoded}"
-                       f"&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp={time_stamp_encoded}"
-                       f"&currency=trc20eth&walletType=hot")
+    def wallet_request(self, host, path, method):
+        builder = UrlParamsBuilder()
+        builder.put_url("currency", "trc20eth")
+        builder.put_url("walletType", "hot")
+        self.create_wallet_sign(api_key=HTX_WALLET_API_KEY, secret_key=HTX_WALLET_API_SECRET_KEY, method=method,
+                                url=f'{host}{path}', builder=builder)
+        request_url = f'{host}{path}{builder.build_url()}'
+        return request_url
 
+    def api_request(self, host, path, method):
+        builder = UrlParamsBuilder()
+        self.create_wallet_sign(api_key=HTX_API_KEY, secret_key=HTX_API_SECRET_KEY, method=method, url=f'{host}{path}',
+                                builder=builder)
+        request_url = f'{host}{path}{builder.build_url()}'
         return request_url
