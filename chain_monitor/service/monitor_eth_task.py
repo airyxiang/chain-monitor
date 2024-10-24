@@ -10,9 +10,6 @@ contract_address = ETH.get('TRON_CONTRACT')
 contract = TokenContract(contract_address)
 channel = MONITOR_SLACK_URL
 
-polo_title = ['polo_account', 'polo_cold_wallet', 'polo_warm_wallet', 'polo_hot_wallet']
-htx_title = ['htx_account', 'htx_wallet', 'reserve']
-
 
 # 每日报告 total supply, polo_justinca_eth, htx_justinca_eth, tron链reserve余额，polo钱包ethold， htx钱包ethold
 # 待补充eth = total supply- polo_justinca_eth- htx_justinca_eth-tron链reserve
@@ -42,10 +39,14 @@ def monitor_supplemented_eth():
 
     slack_message = SlackMessage()
     slack_message.add_code_block_message(f'Total Supply is {eth_total_balance}')
+
+    polo_title = ['polo_HE_account', 'polo_cold_wallet', 'polo_warm_wallet', 'polo_hot_wallet']
     slack_message.add_table(polo_title, [
-        ['Unknown', polo_cold_wallet_balance, polo_hot_wallet_balance, polo_warm_wallet_balance]
+        ['Unknown', polo_cold_wallet_balance, polo_warm_wallet_balance, polo_hot_wallet_balance]
     ])
-    slack_message.add_table(htx_title, [['Unknown', htx_wallet_eth, 'Unknown']])
+
+    htx_title = ['htx_HE_account', 'htx_wallet']
+    slack_message.add_table(htx_title, [['Unknown', htx_wallet_eth]])
 
     # if supplemented_eth > 0:
     #     slack_message.add_message(f'Supplemented supply is {supplemented_eth}')

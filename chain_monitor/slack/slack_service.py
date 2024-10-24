@@ -10,10 +10,14 @@ slack_client = SlackClient()
 lock = threading.Lock()
 
 
-def send(channel, messages):
+def send(channel, messages, batch=True):
     with lock:
-        for message in messages:
+        if batch:
+            message = '\n'.join(messages)
             slack_client.post(channel=channel, message=message)
+        else:
+            for message in messages:
+                slack_client.post(channel=channel, message=message)
 
 
 def send_direct_message(channel, message: str):
