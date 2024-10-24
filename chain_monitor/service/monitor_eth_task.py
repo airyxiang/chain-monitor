@@ -21,21 +21,18 @@ def monitor_supplemented_eth():
     eth_total_balance = convert_to_float(contract.total_supply())
 
     # todo api key
-    polo_account_eth = polo.get_account_balance_by_currency('ETH')
-    htx_account_eth = htx.get_account_balance_by_currency('ETH')
-
-    # todo address
-    # tron_reserve_eth = convert_to_float(contract.balance_of(''))
-    tron_reserve_eth = 0
+    polo_HE_balance = polo.get_account_balance_by_currency('ETH')
+    htx_HE_balance = htx.get_account_balance_by_currency('ETH')
+    reserve = polo_HE_balance + htx_HE_balance
 
     polo_cold_wallet_balance = convert_to_float(contract.balance_of(POLO_COLD_WALLET))
     polo_warm_wallet_balance = convert_to_float(contract.balance_of(POLO_WARM_WALLET))
     polo_hot_wallet_balance = convert_to_float(contract.balance_of(POLO_HOT_WALLET))
-
     polo_wallet_eth = polo_cold_wallet_balance + polo_warm_wallet_balance + polo_hot_wallet_balance
+
     htx_wallet_eth = htx.get_wallet_balance()
 
-    # supplemented_eth = eth_total_balance - polo_account_eth - htx_account_eth - tron_reserve_eth
+    supplemented_eth = eth_total_balance - polo_wallet_eth - htx_wallet_eth - reserve
 
     slack_message = SlackMessage()
     slack_message.add_code_block_message(f'Total Supply is {eth_total_balance}')
@@ -50,17 +47,15 @@ def monitor_supplemented_eth():
 
     # if supplemented_eth > 0:
     #     slack_message.add_message(f'Supplemented supply is {supplemented_eth}')
-    # slack_message.add_warning('lily', 'tahoe')
-
-    # if polo_wallet_eth > polo_account_eth:
-    #     polo_account_eth = 'Unknown'
+    #     # slack_message.add_warning('lily', 'tahoe')
+    #
+    # if polo_wallet_eth > polo_HE_balance:
     #     slack_message.add_message(
-    #         f'Poloniex wallet balance is {polo_wallet_eth}, account balance is {polo_account_eth}'
+    #         f'Poloniex wallet balance is {polo_wallet_eth}, account balance is {polo_HE_balance}'
     #     )
-    # slack_message.add_warning('lily', 'tahoe')
-    # if htx_wallet_eth > htx_account_eth:
-    #     htx_account_eth = 'Unknown'
-    #     slack_message.add_message(f'HTX wallet balance is {htx_wallet_eth}, account balance is {htx_account_eth}')
-    # slack_message.add_warning('lily', 'tahoe')
+    #     # slack_message.add_warning('lily', 'tahoe')
+    # if htx_wallet_eth > htx_HE_balance:
+    #     slack_message.add_message(f'HTX wallet balance is {htx_wallet_eth}, account balance is {htx_HE_balance}')
+    #     # slack_message.add_warning('lily', 'tahoe')
 
     slack_service.send_message(channel=channel, message=slack_message)
