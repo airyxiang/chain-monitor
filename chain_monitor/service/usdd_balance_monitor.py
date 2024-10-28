@@ -21,12 +21,14 @@ def monitor_balance():
         err_msg = f'Get balance failed. {str(ex)}'
         logger.error(err_msg)
         slack_service.send_message(err_msg, USDD_MINING_REWARD)
+        slack_service.send_warning('hosea')
         return
 
     message = SlackMessage()
     if balance < threshold:
         message.add_message(f'Balance of {monitor_address} {balance} is too low !')
         message.add_warning('chris', 'hosea', 'yuki', 'jasmine')
+    else:
+        message.add_message(f'Balance of {monitor_address} is {balance}.')
 
-    message.add_message(f'Balance of {monitor_address} is {balance}.')
     slack_service.send_message(message=message, channel=USDD_MINING_REWARD)

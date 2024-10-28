@@ -22,7 +22,7 @@ class SlackMessage:
         self.add_message(self._create_table(headers=headers, rows=rows))
 
     def add_warning(self, *members):
-        message = ''.join(f'<@{slack_members.get(member, '')}>' for member in members)
+        message = ''.join(f"<@{slack_members.get(member, '')}>" for member in members)
         self.add_message(message=message)
 
     @staticmethod
