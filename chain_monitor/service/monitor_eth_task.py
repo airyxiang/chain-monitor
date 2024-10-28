@@ -1,4 +1,4 @@
-from chain_monitor.configurations.configuration import ETH, MONITOR_SLACK_URL, POLO_COLD_WALLET, POLO_WARM_WALLET, \
+from chain_monitor.configurations.configuration import ETH, ETH_MONITOR, POLO_COLD_WALLET, POLO_WARM_WALLET, \
     POLO_HOT_WALLET
 from chain_monitor.remote.htx import htx
 from chain_monitor.remote.polo import polo
@@ -8,7 +8,7 @@ from chain_monitor.web3.contract.tron_contract_factory import TokenContract
 
 contract_address = ETH.get('TRON_CONTRACT')
 contract = TokenContract(contract_address)
-channel = MONITOR_SLACK_URL
+channel = ETH_MONITOR
 
 
 # 每日报告 total supply, polo_justinca_eth, htx_justinca_eth, tron链reserve余额，polo钱包ethold， htx钱包ethold
