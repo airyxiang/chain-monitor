@@ -25,7 +25,7 @@ def initialize(force=False, force_logging_stdout=False):
 
     global scheduler
     time_zone = pytz.timezone('Asia/Shanghai')
-    scheduler = AsyncIOScheduler(timezone=time_zone)
+    scheduler = BackgroundScheduler(timezone=time_zone)
 
     logger.debug('App initialized')
 
