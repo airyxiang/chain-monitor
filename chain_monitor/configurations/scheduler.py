@@ -15,3 +15,4 @@ def cron_eth_monitor():
 def run():
     logger.info("Starting scheduler")
     scheduler.start()
+    logger.info("Scheduler started")
