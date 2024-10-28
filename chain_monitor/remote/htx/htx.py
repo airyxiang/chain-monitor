@@ -9,25 +9,8 @@ logger = get_logger(__name__)
 API_URL = 'https://api.huobi.pro'
 WALLET_API_URL = 'https://wallet-tron.huobi.com'
 
-import asyncio
 
-
-def get_or_create_event_loop():
-    try:
-        return asyncio.get_event_loop()
-    except RuntimeError as ex:
-        if "There is no current event loop in thread" in str(ex):
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            return loop
-        else:
-            raise ex
-
-
-loop = get_or_create_event_loop()
-
-
-def get_account_balance_by_currency(currency):
+def get_account_balance_by_currency_sdk(currency):
     account_client = AccountClient(api_key=HTX_API_KEY, secret_key=HTX_API_SECRET_KEY, url=API_URL)
     account_balance_list = account_client.get_account_balance()
     account_balances = account_balance_list[0]
@@ -35,6 +18,14 @@ def get_account_balance_by_currency(currency):
     if not balance:
         return 0
     return balance[0].balance
+
+
+def get_account_balance_by_currency(currency='ETH'):
+    htx_sdk = HtxSDK()
+    url = htx_sdk.api_request(host=WALLET_API_URL, path='/accounts/balances', method='GET')
+    response = requests.get(url, params={})
+    print(response)
+    return float(response.json().get('data'))
 
 
 def get_wallet_balance():

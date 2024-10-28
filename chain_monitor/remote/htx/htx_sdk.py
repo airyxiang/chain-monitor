@@ -34,6 +34,25 @@ class HtxSDK:
         s = base64.b64encode(dig).decode()
         builder.put_url("Signature", s)
 
+    def create_api_sign(self, api_key, secret_key, method, url, builder):
+        if api_key is None or secret_key is None or api_key == "" or secret_key == "":
+            raise HuobiApiException(HuobiApiException.KEY_MISSING, "API key and secret key are required")
+
+        builder.put_url("AccessKeyId", api_key)
+        builder.put_url("SignatureVersion", "2")
+        builder.put_url("SignatureMethod", "HmacSHA256")
+        builder.put_url("Timestamp", self.__time)
+
+        host = urllib.parse.urlparse(url).hostname
+        path = urllib.parse.urlparse(url).path
+
+        keys = sorted(builder.param_map.keys())
+        qs0 = '&'.join(['%s=%s' % (key, parse.quote(builder.param_map[key], safe='')) for key in keys])
+        payload0 = '%s\n%s\n%s\n%s' % (method, host, path, qs0)
+        dig = hmac.new(secret_key.encode('utf-8'), msg=payload0.encode('utf-8'), digestmod=hashlib.sha256).digest()
+        s = base64.b64encode(dig).decode()
+        builder.put_url("Signature", s)
+
     def wallet_request(self, host, path, method, currency='trc20eth', wallet_type='withdraw'):
         builder = UrlParamsBuilder()
         builder.put_url("currency", currency)

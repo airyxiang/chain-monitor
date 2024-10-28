@@ -21,9 +21,10 @@ def monitor_supplemented_eth():
     eth_total_balance = convert_to_float(contract.total_supply())
 
     # todo api key
-    polo_HE_balance = polo.get_account_balance_by_currency('ETH')
-    htx_HE_balance = htx.get_account_balance_by_currency('ETH')
-    reserve = polo_HE_balance + htx_HE_balance
+    # polo_HE_balance = polo.get_account_balance_by_currency('ETH')
+    # htx_HE_balance = htx.get_account_balance_by_currency('ETH')
+    # reserve = polo_HE_balance + htx_HE_balance
+    reserve = 0
 
     polo_cold_wallet_balance = convert_to_float(contract.balance_of(POLO_COLD_WALLET))
     polo_warm_wallet_balance = convert_to_float(contract.balance_of(POLO_WARM_WALLET))
