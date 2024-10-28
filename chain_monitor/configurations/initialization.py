@@ -1,4 +1,5 @@
 import pytz
+import asyncio
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 # from apscheduler.schedulers.background import BackgroundScheduler
@@ -31,6 +32,8 @@ def initialize(force=False, force_logging_stdout=False):
     logger.debug('App initialized')
 
     _app_initialized = True
+
+    asyncio.get_event_loop().run_forever()
 
 
 initialize()

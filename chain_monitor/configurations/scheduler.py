@@ -1,5 +1,3 @@
-import asyncio
-
 from chain_monitor.configurations.initialization import scheduler
 
 from chain_monitor.configurations.logger import get_logger
@@ -18,5 +16,4 @@ def run():
     logger.info("Starting scheduler")
     scheduler.add_job(monitor_supplemented_eth, 'interval', minutes=1)
     scheduler.start()
-    asyncio.get_event_loop().run_forever()
     logger.info("Scheduler started")
