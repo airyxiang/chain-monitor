@@ -9,6 +9,23 @@ logger = get_logger(__name__)
 API_URL = 'https://api.huobi.pro'
 WALLET_API_URL = 'https://wallet-tron.huobi.com'
 
+import asyncio
+
+
+def get_or_create_event_loop():
+    try:
+        return asyncio.get_event_loop()
+    except RuntimeError as ex:
+        if "There is no current event loop in thread" in str(ex):
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            return loop
+        else:
+            raise ex
+
+
+loop = get_or_create_event_loop()
+
 
 def get_account_balance_by_currency(currency):
     account_client = AccountClient(api_key=HTX_API_KEY, secret_key=HTX_API_SECRET_KEY, url=API_URL)
