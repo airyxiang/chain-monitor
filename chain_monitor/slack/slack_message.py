@@ -1,6 +1,8 @@
+import re
 from collections import OrderedDict
 
 from chain_monitor.configurations.configuration import slack_members
+from chain_monitor.utils.formatter import get_text
 
 
 class SlackMessage:
@@ -25,9 +27,10 @@ class SlackMessage:
         message = ''.join(f"<@{slack_members.get(member, '')}>" for member in members)
         self.add_message(message=message)
 
+    # <url | text>
     @staticmethod
     def _create_table(headers, rows):
-        col_widths = [max(len(str(item)) for item in col) for col in zip(*rows, headers)]
+        col_widths = [max(len(get_text(item)) for item in col) for col in zip(*rows, headers)]
         header_row = ' | '.join(header.ljust(w) for header, w in zip(headers, col_widths))
         separator = '-+-'.join('-' * w for w in col_widths)
         table = f"{header_row}\n{separator}\n"
