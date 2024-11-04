@@ -45,6 +45,6 @@ def monitor_mint_eth():
                  convert_to_float(int(event.get('result').get('amount', 0))), packaged_at,
                  event.get('event_name')])
         message.add_table(headers=headers, rows=rows)
-        slack_service.send_message(channel=configuration.TEST, message=message)
+        slack_service.send_message(channel=configuration.ETH_MONITOR, message=message)
 
     conn.set(redis_key, current_time_stamp)
