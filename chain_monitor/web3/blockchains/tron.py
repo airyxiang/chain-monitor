@@ -38,7 +38,7 @@ class TrongridClient:
         return self._send_request(f'{self.URL}/v1/transactions/{transaction_id}/events?only_confirmed=True')
 
     def get_events(self, contract_address, event_name, min_block_timestamp=0, limit=MIN_PER_PAGE, only_confirmed=False,
-                   only_first_page=False):
+                   only_first_page=False, max_block_timestamp=0):
         """
         Default limit per page is 20, max 200.
         https://developers.tron.network/reference#events-by-contract-address
@@ -48,6 +48,7 @@ class TrongridClient:
             'limit': limit,
             'order_by': 'block_timestamp,desc',
             'min_block_timestamp': min_block_timestamp,
+            'max_block_timestamp': max_block_timestamp,
             'only_confirmed': only_confirmed
         })
         endpoint = f'{self.URL}/v1/contracts/{contract_address}/events?{payload}'

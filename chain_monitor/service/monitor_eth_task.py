@@ -29,11 +29,8 @@ def monitor_supplemented_eth():
     polo_cold_wallet_balance = convert_to_float(contract.balance_of(POLO_COLD_WALLET))
     polo_warm_wallet_balance = convert_to_float(contract.balance_of(POLO_WARM_WALLET))
     polo_hot_wallet_balance = convert_to_float(contract.balance_of(POLO_HOT_WALLET))
-    polo_wallet_eth = polo_cold_wallet_balance + polo_warm_wallet_balance + polo_hot_wallet_balance
 
     htx_wallet_eth = htx.get_wallet_balance()
-
-    supplemented_eth = eth_total_balance - polo_wallet_eth - htx_wallet_eth - reserve
 
     slack_message = SlackMessage()
     slack_message.add_code_block_message(f'Total Supply is {eth_total_balance}')
@@ -46,6 +43,8 @@ def monitor_supplemented_eth():
     htx_title = ['htx_HE_account', 'htx_wallet']
     slack_message.add_table(htx_title, [['Unknown', htx_wallet_eth]])
 
+    # polo_wallet_eth = polo_cold_wallet_balance + polo_warm_wallet_balance + polo_hot_wallet_balance
+    # supplemented_eth = eth_total_balance - polo_wallet_eth - htx_wallet_eth - reserve
     # if supplemented_eth > 0:
     #     slack_message.add_message(f'Supplemented supply is {supplemented_eth}')
     #     # slack_message.add_warning('lily', 'tahoe')
