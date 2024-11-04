@@ -11,5 +11,6 @@ def generate_transaction_link(chain, transaction_hash):
 
 
 def get_text(text):
+    text = str(text)
     match = re.match(r'^<(.*)\|(.*)>$', text)
-    return str(match.group(2)) if match else str(text)
+    return match.group(2) if match else text
