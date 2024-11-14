@@ -176,5 +176,22 @@ class TrueUSDContract:
         return self.instance.functions.chainReserveFeed().call()
 
 
+class USDTContract:
+    abi = None
+
+    def __init__(self, address, web3=web3):
+        self.reset(address, web3)
+
+    def reset(self, address, web3):
+        if USDTContract.abi is None:
+            with open('./chain_monitor/web3/contract/abi/contract_abi/USDT.json', 'r') as abi:
+                USDTContract.abi = json.load(abi)
+        self.address = web3.to_checksum_address(address)
+        self.instance = web3.create_contract_instance(self.address, USDTContract.abi)
+
+    def isBlackListed(self, address):
+        return self.instance.functions.isBlackListed(address).call()
+
+
 ControllerContract.abi = None
 ControllerV2Contract.abi = None

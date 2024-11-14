@@ -1,4 +1,4 @@
-from chain_monitor.configurations.configuration import USDD, USDD_MINING_REWARD
+from chain_monitor.configurations.configuration import USDD, USDD_MINING_REWARD, TEST
 from chain_monitor.configurations.logger import get_logger
 from chain_monitor.utils.money import convert_to_float
 from chain_monitor.slack import slack_service, SlackMessage
@@ -20,7 +20,7 @@ def monitor_balance():
     except Exception as ex:
         err_msg = f'Get balance failed. {str(ex)}'
         logger.error(err_msg)
-        slack_service.send_message(err_msg, USDD_MINING_REWARD)
+        slack_service.send_message(err_msg, TEST)
         slack_service.send_warning('hosea')
         return
 

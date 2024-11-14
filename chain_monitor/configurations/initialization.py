@@ -4,6 +4,8 @@ import pytz
 # from apscheduler.schedulers.asyncio import AsyncIOScheduler
 # from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.blocking import BlockingScheduler
+
+from chain_monitor.configurations.configuration import TIME_ZONE
 from chain_monitor.configurations.logging import setup_logging
 from chain_monitor.configurations.redis import setup_redis
 from chain_monitor.configurations.logger import get_logger
@@ -26,7 +28,7 @@ def initialize(force=False, force_logging_stdout=False):
     setup_redis()
 
     global scheduler
-    time_zone = pytz.timezone('Asia/Shanghai')
+    time_zone = pytz.timezone(TIME_ZONE)
     scheduler = BlockingScheduler(timezone=time_zone)
 
     logger.debug('App initialized')
