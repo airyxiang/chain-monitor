@@ -1,4 +1,4 @@
-from chain_monitor.configurations.configuration import USDT, TEST
+from chain_monitor.configurations.configuration import USDT, TEST, ETH_MONITOR
 from chain_monitor.configurations.logger import get_logger
 from chain_monitor.slack import slack_service, SlackMessage
 from chain_monitor.web3.contract.contract_factory import USDTContract
@@ -16,12 +16,12 @@ def monitoring_blacklisted():
     except Exception as ex:
         err_msg = f'Get balance failed. {str(ex)}'
         logger.error(err_msg)
-        slack_service.send_message(err_msg, TEST)
+        slack_service.send_message(err_msg, ETH_MONITOR)
         slack_service.send_warning('hosea')
         return
 
-    if not is_black_listed:
+    if is_black_listed:
         message = SlackMessage()
         message.add_message(f'{monitor_address} has been blacklisted!')
-        message.add_warning('hosea', 'lily', 'tahoe')
+        message.add_warning('tahoe', 'lily', 'hosea')
         slack_service.send_message(message=message, channel=TEST)
