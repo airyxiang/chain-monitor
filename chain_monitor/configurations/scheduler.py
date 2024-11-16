@@ -2,7 +2,7 @@ from chain_monitor.configurations.initialization import scheduler
 
 from chain_monitor.configurations.logger import get_logger
 from chain_monitor.service.monitor_eth_task import monitor_supplemented_eth, monitor_mint_eth
-from chain_monitor.service.monitor_stu_balackelist import monitoring_blacklisted
+from chain_monitor.service.monitor_stu_balackelist import monitoring_blacklisted, monitoring_user_status
 from chain_monitor.service.usdd_balance_monitor import monitor_balance
 
 logger = get_logger(__name__)
@@ -30,6 +30,12 @@ def cron_eth_mint():
 def cron_monitoring_blacklisted():
     logger.info('Process stusdt blacklist')
     monitoring_blacklisted()
+
+
+@scheduler.scheduled_job('cron', hour='0', minute=0)
+def cron_monitoring_stusdt_status():
+    logger.info('Process stusdt status')
+    monitoring_user_status()
 
 
 def run():
