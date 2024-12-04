@@ -190,7 +190,12 @@ class USDTContract:
         self.instance = web3.create_contract_instance(self.address, USDTContract.abi)
 
     def isBlackListed(self, address):
+        address = web3.to_checksum_address(address)
         return self.instance.functions.isBlackListed(address).call()
+
+    def balanceOf(self, address):
+        address = web3.to_checksum_address(address)
+        return self.instance.functions.balanceOf(address).call()
 
 
 ControllerContract.abi = None

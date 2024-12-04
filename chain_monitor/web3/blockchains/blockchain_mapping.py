@@ -1,7 +1,8 @@
 from .ava import Ava
 from .bsc import Bsc
 from .eth import Eth
-from .tron import Tron, is_address as is_tron_address
+# from .tron import Tron, is_address as is_tron_address
+from .tron import Tron
 from ..constants import Blockchain
 
 
@@ -12,8 +13,8 @@ class UnknownBlockchainId(Exception):
 def blockchain_id_for_address(address):
     if len(address) == 42 and address.startswith('0x'):
         return Blockchain.ETH
-    elif is_tron_address(address):
-        return Blockchain.TRON
+    # elif is_tron_address(address):
+    #     return Blockchain.TRON
     else:
         raise NotImplementedError
 

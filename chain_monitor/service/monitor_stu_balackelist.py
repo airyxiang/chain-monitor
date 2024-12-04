@@ -25,7 +25,7 @@ def monitoring_blacklisted():
         message = SlackMessage()
         message.add_message(f'>`{monitor_address}` has been blacklisted!')
         message.add_warning('tahoe', 'lily', 'hosea')
-        slack_service.send_message(message=message, channel=TEST)
+        slack_service.send_message(message=message, channel=STUSDT_ONLINE_ALERT)
 
 
 # check every day, send status to monitor.
@@ -33,7 +33,8 @@ def monitoring_user_status():
     try:
         is_black_listed = contract.isBlackListed(monitor_address)
         if not is_black_listed:
-            slack_service.send_direct_message(f'`{monitor_address}` remains whitelisted.', STUSDT_ONLINE_ALERT)
+            slack_service.send_direct_message(message=f'`{monitor_address}` remains whitelisted.',
+                                              channel=STUSDT_ONLINE_ALERT)
     except Exception as ex:
         err_msg = f'Get status failed. {str(ex)}'
         logger.error(err_msg)

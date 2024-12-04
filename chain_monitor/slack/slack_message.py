@@ -1,4 +1,4 @@
-import re
+# import re
 from collections import OrderedDict
 
 from chain_monitor.configurations.configuration import slack_members
